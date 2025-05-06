@@ -1,70 +1,83 @@
-////
-//  ViewController.swift
-//  lab5
-//
-//  Created by Olivia Sapp on 4/28/25.
-//
-
+// ViewController.swift
 import UIKit
 
-class tableCell: UITableViewCell {
-    
-    @IBOutlet weak var cellLabel: UILabel!
-    
+struct QuizTopic {
+  let title:    String
+  let subtitle: String
+  let iconName: String   // ← must exactly match your asset names
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBAction func alertPressed(_ sender: Any) {
-      let alert = UIAlertController(title: "My Alert", message: "Settings go here.", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "OK",
-                                    style: .default,
-                                    handler: { _ in
-        NSLog("\"OK\" pressed.")
-      }))
-      
-      self.present(alert, animated: true, completion: {
-        NSLog("The completion handler fired")
-      })
-    }
+class ViewController: UIViewController {
+  @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var tableView: UITableView!
-    
-    var cellName = ["first", "second", "third"]
+  let topics: [QuizTopic] = [
+    .init(
+      title:    "Mathematics",
+      subtitle: "Test your skills with numbers and equations.",
+      iconName: "math"         // ← asset named “math”
+    ),
+    .init(
+      title:    "Marvel Super Heroes",
+      subtitle: "How well do you know your favorite heroes?",
+      iconName: "marvel"       // ← asset named “marvel”
+    ),
+    .init(
+      title:    "Science",
+      subtitle: "Explore physics, chemistry, and biology!",
+      iconName: "science"      // ← asset named “science”
+    )
+  ]
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
-    //sets up the table size wise, how many rows
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellName.count
-    }
-    
-    //input the data into the table
-    //this table only has a label for each cell
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellPrototype", for: indexPath) as! tableCell
-        cell.cellLabel?.text = cellName[indexPath.row]
-        return cell
-    }
-    
-    //sets the height of each cell
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath)  -> CGFloat{
-        return 100
-    }
-    
-    //segue
-    //directes the view controler to go to the View2Controler
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToSecondVC", sender: cellName[indexPath.row])
-    }
-    
-    //before the segue is completed it runs this prepare function
-    //this function sends the data from this view controler to the next view controler
-    //we want to send the name of the cell that we clicked on to the next page
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    tableView.dataSource = self
+    tableView.delegate   = self
+  }
 
-
+  @IBAction func alertPressed(_ sender: Any) {
+    let alert = UIAlertController(
+      title:        "My Alert",
+      message:      "Settings go here.",
+      preferredStyle: .alert
+    )
+    alert.addAction(.init(title: "OK", style: .default) { _ in
+      NSLog("\"OK\" pressed.")
+    })
+    present(alert, animated: true) {
+      NSLog("The completion handler fired")
+    }
+  }
 }
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+  func tableView(_ tv: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return topics.count
+  }
+
+  func tableView(
+    _ tv: UITableView,
+    cellForRowAt indexPath: IndexPath
+  ) -> UITableViewCell {
+    let cell = tv.dequeueReusableCell(
+      withIdentifier: "QuizTopicCell",
+      for: indexPath
+    ) as! QuizTopicCell
+
+    let topic = topics[indexPath.row]
+    cell.titleLabel.text       = topic.title
+    cell.subtitleLabel.text    = topic.subtitle
+    cell.iconImageView.image   = UIImage(named: topic.iconName)
+
+    return cell
+  }
+
+  func tableView(_ tv: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 80
+  }
+
+  func tableView(_ tv: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tv.deselectRow(at: indexPath, animated: true)
+    // … handle selection …
+  }
+}
+
