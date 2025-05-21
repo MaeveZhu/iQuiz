@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5074F26B2DDD46F300BA1712 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5074F26A2DDD46F300BA1712 /* Settings.bundle */; };
 		509BA1EC2DD86C7C00275197 /* Network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509BA1EB2DD86C7C00275197 /* Network.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		503D28D62DC9ABC100121F6A /* iQuiz5.5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iQuiz5.5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		503D28EC2DC9ABC400121F6A /* iQuiz5.5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iQuiz5.5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		503D28F62DC9ABC400121F6A /* iQuiz5.5UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iQuiz5.5UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5074F26A2DDD46F300BA1712 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		509BA1EB2DD86C7C00275197 /* Network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Network.framework; path = System/Library/Frameworks/Network.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 		503D28CD2DC9ABC100121F6A = {
 			isa = PBXGroup;
 			children = (
+				5074F26A2DDD46F300BA1712 /* Settings.bundle */,
 				503D28D82DC9ABC100121F6A /* iQuiz5.5 */,
 				503D28EF2DC9ABC400121F6A /* iQuiz5.5Tests */,
 				503D28F92DC9ABC400121F6A /* iQuiz5.5UITests */,
@@ -240,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5074F26B2DDD46F300BA1712 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +308,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 87FZ4MRH6V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iQuiz5.5/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -331,6 +336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 87FZ4MRH6V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iQuiz5.5/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

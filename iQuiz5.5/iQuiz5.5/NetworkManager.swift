@@ -1,31 +1,72 @@
 import Foundation
 import UIKit
+import Network
 
 class NetworkManager {
     static let shared = NetworkManager()
-    private init() {}
+    private let monitor = NWPathMonitor()
+    private(set) var isConnected = true
+    
+    private init() {
+        setupNetworkMonitoring()
+    }
+    
+    private func setupNetworkMonitoring() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            DispatchQueue.main.async {
+                self?.isConnected = path.status == .satisfied
+            }
+        }
+        monitor.start(queue: DispatchQueue.global())
+    }
     
     var topics: [QuizTopic] = []
     
     func fetchTopics(urlString: String, completion: @escaping ([QuizTopic]?) -> Void) {
+        // First try to load from local storage if offline
+        if !isConnected {
+            if let localTopics = StorageManager.shared.loadQuizzes() {
+                self.topics = localTopics
+                completion(localTopics)
+                return
+            }
+            completion(nil)
+            return
+        }
+        
+        // If online, fetch from network
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             DispatchQueue.main.async {
-                if let _ = error {
-                    completion(nil)
+                if let error = error {
+                    print("Network error: \(error)")
+                    // Try to load from local storage as fallback
+                    if let localTopics = StorageManager.shared.loadQuizzes() {
+                        self?.topics = localTopics
+                        completion(localTopics)
+                    } else {
+                        completion(nil)
+                    }
                     return
                 }
+                
                 guard let data = data else {
                     completion(nil)
                     return
                 }
+                
                 do {
                     let topics = try JSONDecoder().decode([QuizTopic].self, from: data)
+                    self?.topics = topics
+                    // Save to local storage
+                    StorageManager.shared.saveQuizzes(topics)
                     completion(topics)
                 } catch {
+                    print("Decoding error: \(error)")
                     completion(nil)
                 }
             }

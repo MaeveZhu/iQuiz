@@ -4,7 +4,7 @@ import Foundation
 
 class ViewController: UIViewController {
     @IBAction func settingsPressed(_ sender: Any) {
-        performSegue(withIdentifier: "showSettings", sender: nil)
+        SettingsManager.shared.openSettings()
     }
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,13 +18,14 @@ class ViewController: UIViewController {
     }
     
     func loadTopics() {
-        guard let urlString = SettingsManager.shared.dataSourceURL else { return }
+        let urlString = SettingsManager.shared.dataSourceURL
         NetworkManager.shared.fetchTopics(urlString: urlString) { [weak self] topics in
             guard let self = self else { return }
             if let topics = topics {
                 self.topics = topics
                 self.tableView.reloadData()
             } else {
+                // handle error if needed
             }
         }
     }
@@ -56,15 +57,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let questionVC = segue.destination as? QuestionViewController,
            let topic = sender as? QuizTopic {
-            let questions = topic.questions.map { q in
-                Question(
-                    text: q.text,
-                    options: q.answers,
-                    correctAnswerIndex: Int(q.answer) ?? 0
-                )
-            }
-            questionVC.quizManager = QuizManager(questions: questions)
-            questionVC.currentQuestion = questionVC.quizManager?.getNextQuestion()
+            QuizManager.shared.loadQuiz(for: topic)
+            questionVC.quizManager = QuizManager.shared
+            questionVC.currentQuestion = QuizManager.shared.getNextQuestion()
         }
     }
 }

@@ -71,9 +71,6 @@
                                                 <action selector="settingsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aRT-LU-eGn"/>
                                             </connections>
                                         </button>
-                                        <connections>
-                                            <segue destination="ZeC-Bw-GJ6" kind="show" identifier="showSettings" id="OAa-JV-8I3"/>
-                                        </connections>
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" systemColor="systemPurpleColor"/>
@@ -268,64 +265,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7j-TG-H6t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-251" y="1219"/>
-        </scene>
-        <!--Settings View Controller-->
-        <scene sceneID="Iq3-w4-OOJ">
-            <objects>
-                <viewController id="ZeC-Bw-GJ6" customClass="SettingsViewController" customModule="iQuiz5_5" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Jvl-Zo-5Ap">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hj-pf-Z5Z">
-                                <rect key="frame" x="140" y="749" width="112" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Check Now"/>
-                                <connections>
-                                    <action selector="checkNowTapped:" destination="ZeC-Bw-GJ6" eventType="touchUpInside" id="OnN-0M-Hb4"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delete the current URL and enter a new data source here!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYc-lJ-IXh">
-                                <rect key="frame" x="42" y="150" width="309" height="241"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="URL" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uDt-GZ-K6r">
-                                <rect key="frame" x="42" y="399" width="309" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Refresh Interval (seconds):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYq-dG-kDT">
-                                <rect key="frame" x="42" y="441" width="210" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oru-pN-ozh">
-                                <rect key="frame" x="42" y="483" width="309" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="aRT-GR-JGa"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="bai-Vv-t9u"/>
-                    <connections>
-                        <outlet property="checkNowButton" destination="9Hj-pf-Z5Z" id="ROb-d4-QCO"/>
-                        <outlet property="intervalTextField" destination="Oru-pN-ozh" id="vbK-PZ-4Ho"/>
-                        <outlet property="urlTextField" destination="uDt-GZ-K6r" id="Oby-G2-jya"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OBq-49-xHe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="154.96183206106869" y="-447.18309859154931"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NDs-lz-E4c">
